@@ -1,4 +1,5 @@
 let statuses = [];
+showWaiting();
 
 axios.get("http://localhost:3000/api/orderStatuses").then(({data}) => {
   statuses = data; //gets order status
@@ -12,4 +13,6 @@ axios.get("http://localhost:3000/api/orderStatuses").then(({data}) => {
     };
   })
   showOrderList('#order-list', orders);
-}).catch((err) => showError('#order-list', err));//catching an error
+}).catch((err) => showError('#order-list', err)).finally(() => {
+  setTimeout(hideWaiting, 1500)
+});//catching an error
